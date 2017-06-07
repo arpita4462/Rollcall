@@ -11,7 +11,7 @@ public class RemarkAcitvity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remark_acitvity);
 
-        Log.i("arpita","jena..");
+        Log.i("arpita","jena..5");
 
 
     }
