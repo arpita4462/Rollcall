@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_detail"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+
+    <Button
+        android:id="@+id/btn_atten"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Take Attendance"
+        android:textColor="@color/buttontext"
+        android:background="@color/colorAccent"        />
+    <Button
+        android:id="@+id/btn_remark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Remark"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/buttontext"
+        android:background="@color/colorAccent"
+
+        />
+</LinearLayout>

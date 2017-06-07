@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Rollcall</string>
+    <string name="button_tittle">Click ME</string>
+    <string name="hint_name">Enter EmailId</string>
+    <string name="hint_pass">Password</string>
+    <string name="err_msg_email">Enter Correct EmailId</string>
+    <string name="err_msg_password">Enter Your Password</string>
+    <string name="hint_class">Enter Class</string>
+    <string name="hint_sub">Enter Subject</string>
+    <string name="roll_no">Enter Roll Number</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="my_text"><u>Forget Password</u></string>
+    <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+
+    <string-array name="class_name">
+        <item>Class-V</item>
+        <item>Class-VI</item>
+        <item>Class-VII</item>
+        <item>Class-VIII</item>
+        <item>Class-IX</item>
+        <item>Class-X</item>
+        <item>Class-XI</item>
+        <item>Class-XII</item>
+    </string-array>
+    <string-array name="section">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+    </string-array>
+</resources>

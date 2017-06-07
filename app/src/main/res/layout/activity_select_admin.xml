@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_choose"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    tools:context="com.atrio.rollcall.admin.SelectAdmin">
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@color/buttontext"
+        android:id="@+id/btn_reg"
+        android:text="Registration"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/textView"
+       />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@color/buttontext"
+        android:id="@+id/btn_detail"
+        android:layout_marginTop="20dp"
+        android:text="Details"
+        android:layout_below="@+id/btn_reg"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@color/buttontext"
+        android:id="@+id/btn_report"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btn_detail"
+        android:text="Report"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@color/buttontext"
+        android:id="@+id/btn_dailyreport"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btn_report"
+        android:text="Daily Report"
+        android:layout_centerInParent="true"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textColor="@color/buttontext"
+        android:id="@+id/btn_timetable"
+        android:layout_marginTop="20dp"
+        android:text="Time Table"
+        android:layout_below="@+id/btn_dailyreport"
+        android:layout_centerInParent="true"/>
+
+    <ImageButton
+        android:id="@+id/img_logout"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="18dp"
+        android:background="@null"
+        android:src="@drawable/img_logout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/img_logout"
+        android:layout_alignStart="@+id/img_logout"
+        android:layout_below="@+id/img_logout"
+        android:layout_marginTop="11dp"
+        android:textColor="@color/colorAccent"
+        android:text="LOG OUT" />
+
+
+</RelativeLayout>

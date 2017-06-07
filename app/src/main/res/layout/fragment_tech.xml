@@ -1,0 +1,189 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp">
+
+    <!-- vertical ScrollView to make all the items or views scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <!-- LinearLayout Inside ScrollView -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_empid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/empid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Your Employee ID"
+                    android:maxLength="12"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/colorAccent"></EditText>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:hint="Enter Name"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                <EditText
+                    android:id="@+id/firstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:maxLength="20"
+                    android:inputType="textPersonName" />
+            </android.support.design.widget.TextInputLayout>
+            <!-- create a Linear Layout with horizontal orientation and weightSum property -->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:hint="Enter Your E-mail Address"
+                    android:maxLength="50"
+                    android:inputType="textEmailAddress" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_mobno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/mobno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:hint="Enter Mobile Number"
+                    android:maxLength="11"
+                    android:inputType="number"/>
+            </android.support.design.widget.TextInputLayout>
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+                <EditText
+                    android:id="@+id/pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:inputType="textPassword"
+                    android:hint="Enter Password"
+                    android:maxLength="20"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+          <!-- place one TextView and one EditText inside layout using weight property -->
+
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+            <!-- place one TextView and one EditText inside layout using weight property -->
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="Select Gender"
+                    android:textAppearance="@style/TextAppearence.App.TextInputLayout"/>
+
+
+                <RadioGroup
+                    android:id="@+id/radioSex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dp">
+
+                    <RadioButton
+                        android:id="@+id/radioMale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/radioFemale"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Female" />
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Submit"
+                android:layout_margin="20dp"
+                android:textColor="@color/buttontext"
+                android:background="@drawable/btn"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

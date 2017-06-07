@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/ll_parent"
+    android:layout_margin="10dp"
+    android:background="@color/buttontext">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:src="@drawable/stu_icon" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:padding="5dp"
+                android:typeface="normal"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_Rollno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:typeface="normal"
+                android:textColor="@color/black"
+                android:text="Roll No" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+   <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_gravity="right"
+       android:layout_marginRight="20dp"
+       android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+       <RadioGroup
+           android:id="@+id/radioGroup1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal" >
+
+       <RadioButton
+           android:id="@+id/radio_present"
+           android:layout_width="25dp"
+           android:layout_height="25dp"
+           android:background="@drawable/pre_btn"
+           android:button="@null"/>
+       <RadioButton
+           android:id="@+id/radio_absent"
+           android:layout_width="25dp"
+           android:layout_height="25dp"
+           android:background="@drawable/abs_btn"
+           android:button="@null"
+           android:layout_marginLeft="20dp"/>
+</RadioGroup>
+
+     <!--  <Button
+            android:id="@+id/btn_present"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ceck_pres"
+            android:text="" />
+
+        <Button
+            android:id="@+id/btn_absent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/cech_ab"
+            android:text="" />-->
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

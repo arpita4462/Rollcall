@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "546472054152",
+    "firebase_url": "https://rollcall-cbd5f.firebaseio.com",
+    "project_id": "rollcall-cbd5f",
+    "storage_bucket": "rollcall-cbd5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546472054152:android:f3c4eb1eea9954ea",
+        "android_client_info": {
+          "package_name": "com.atrio.rollcall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546472054152-9ogu1qej4b0astflbn4dmkgtki4k19vh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.atrio.rollcall",
+            "certificate_hash": "c94620a7a17325188f206cdab7890f8c53f176f0"
+          }
+        },
+        {
+          "client_id": "546472054152-hh6t9mb3qgbvpakiplhh5hdmvsjhtpjf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.atrio.rollcall",
+            "certificate_hash": "b675c2634d49d49e7ef19d9d98056098c3aa976b"
+          }
+        },
+        {
+          "client_id": "546472054152-s2gbc14icgd49qv1rckag6akirg96vdi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzfYFRQYimOP6WCKQBTzZJvngeLh_y8x8"
+        },
+        {
+          "current_key": "AIzaSyC_-sJAM-GBS_KCJ59CRu55H1BrMWWzgjc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546472054152-s2gbc14icgd49qv1rckag6akirg96vdi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

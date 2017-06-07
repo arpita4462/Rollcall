@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.atrio.rollcall">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".teacher.AttendanceActivity" />
+        <activity android:name=".teacher.TeacherActivity" />
+        <activity
+            android:name=".admin.AdminActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".admin.SelectAdmin" />
+        <activity android:name=".teacher.SelectActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:hardwareAccelerated="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".detail.TeacherDetail" />
+        <activity android:name=".detail.StudentDetail" />
+        <activity android:name=".ReportActivity" />
+        <activity android:name=".admin.AdminLogin" />
+        <activity android:name=".DailyReport" />
+        <activity android:name=".admin.TimeTableActivity" />
+        <activity android:name=".RemarkAcitvity"></activity>
+    </application>
+
+</manifest>
