@@ -228,8 +228,6 @@ public class AttendanceActivity extends AppCompatActivity {
 
 
                                     }
-                                    // Log.i("rollno33",""+list_abs.size());
-                                    //Log.i("rollno34",""+list_abs);
                                     sendmail(v,list_abs);
                                     Toast.makeText(AttendanceActivity.this, "Attendance Submitted", Toast.LENGTH_SHORT).show();
 
