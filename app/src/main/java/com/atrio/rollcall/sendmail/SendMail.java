@@ -88,12 +88,19 @@ protected PasswordAuthentication getPasswordAuthentication() {
         mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
            //String[] mymail={"aarpitactc93@gmail.com,arpitapatel4462@gmail.com"};
 //           String[] my2mail = new String[]{"twinklesingh3893@gmail.com", "aarpitactc93@gmail.com"};
-           for (int i=0;i<my2mail.size();i++){
-               mm.addRecipient(Message.RecipientType.BCC, new InternetAddress(my2mail.get(i)));
-//               Log.i("message_mm",""+mm);
+//           for (int i=0;i<my2mail.size();i++){
+//               mm.addRecipient(Message.RecipientType.BCC, new InternetAddress(my2mail.get(i)));
+////               Log.i("message_mm",""+mm);
+               for (int i=1;i<my2mail.size();i++){
+
+                   //Log.i("message_mm",""+my2mail.get(i));
+                   mm.addRecipient(Message.RecipientType.BCC, new InternetAddress(my2mail.get(i)));
+                   //Log.i("message_mm",""+mm);
 
 
-           }
+
+
+               }
 
 
         mm.setSubject(mail_subject);
