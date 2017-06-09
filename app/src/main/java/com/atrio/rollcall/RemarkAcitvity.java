@@ -172,8 +172,6 @@ public class RemarkAcitvity extends AppCompatActivity {
                 i=2;
                 list_student_info = new ArrayList<>();
                 list_data = new ArrayList<>();
-
-
                 bt_indivi.setBackgroundResource(R.drawable.btn);
                 bt_all.setBackgroundResource(R.drawable.disable_btn);
                 tv_class.setVisibility(View.VISIBLE);
