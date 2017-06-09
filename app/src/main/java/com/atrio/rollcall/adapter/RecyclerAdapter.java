@@ -124,8 +124,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             simpledateformat = new SimpleDateFormat("dd-MM-yyyy");
             datedata = simpledateformat.format(calander.getTime()).toString();
             list_stud = new ArrayList<>();
-
-
         }
     }
 }

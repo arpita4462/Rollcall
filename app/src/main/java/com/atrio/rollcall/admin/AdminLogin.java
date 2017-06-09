@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -47,14 +46,11 @@ public class AdminLogin extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mAuth = FirebaseAuth.getInstance();
-
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser()!=null){
                     startActivity(new Intent(AdminLogin.this,SelectAdmin.class));
-
-
                     finish();
                 }
             }
@@ -77,18 +73,10 @@ public class AdminLogin extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()) {
-                                Log.i("success111", "" + task.isSuccessful());
-
-//                                    FirebaseUser user = mAuth.getCurrentUser();
-//                                    updateUI(user);
                             } else {
-                                // If sign in fails, display a message to the user.
-                                Log.i("failure", "" + task.getException());
                                 Toast.makeText(getApplicationContext(), "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-//                                    updateUI(null);
                             }
-
                         }
                     });
                 }
@@ -101,10 +89,8 @@ public class AdminLogin extends AppCompatActivity {
                 customRestpwd = new CustomRestpwd(AdminLogin.this);
                 customRestpwd.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 customRestpwd.show();
-
             }
         });
-
     }
 
     public void onStart() {
@@ -116,6 +102,5 @@ public class AdminLogin extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(AdminLogin.this,MainActivity.class));
-
     }
 }

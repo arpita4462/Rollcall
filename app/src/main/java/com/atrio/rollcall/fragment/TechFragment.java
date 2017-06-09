@@ -6,7 +6,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,6 @@ public class TechFragment extends Fragment {
     ProgressDialog dialog;
 
     public TechFragment() {
-        // Required empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +59,6 @@ public class TechFragment extends Fragment {
 
         db_instance = FirebaseDatabase.getInstance();
         db_ref = db_instance.getReference("TeacherList");
-//        Log.i("KeyID",""+empID);
-
         dialog = new ProgressDialog(getContext());
         dialog.setMessage("Please Wait....");
         dialog.setCanceledOnTouchOutside(false);
@@ -70,8 +66,6 @@ public class TechFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (isConnected()) {
                  if (validate()){
 
@@ -93,7 +87,6 @@ public class TechFragment extends Fragment {
                              if (dataSnapshot.getChildrenCount() == 0) {
                                  createTeacherDetail(name,empID,emailid,mob,pwd,gender);
 
-
                                  nametv.setText("");
                                  emailtv.setText("");
                                  mobiletv.setText("");
@@ -105,12 +98,9 @@ public class TechFragment extends Fragment {
                                  Toast.makeText(getContext(), "SuccessFully Register", Toast.LENGTH_LONG).show();
                              }else {
 
-
-                                 Log.i("empid1",""+empID);
                                  dialog.dismiss();
                                  Toast.makeText(getContext(), "This Employee ID is already present", Toast.LENGTH_LONG).show();
                                  empidtv.setText("");
-
                              }
                          }
 
@@ -152,8 +142,6 @@ public class TechFragment extends Fragment {
     }
 
     private boolean validate() {
-// check whether the field is empty or not
-
         if (empidtv.getText().toString().trim().length() < 1) {
             empidtv.setError("Please Fill This Field");
             empidtv.requestFocus();

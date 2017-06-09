@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -86,15 +85,8 @@ public class AttendanceActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(AttendanceActivity.this);
         pDialog.setMessage("Please wait..");
         pDialog.setCanceledOnTouchOutside(false);
-
-
-//        pDialog.show();
-
         btn_sub = (Button) findViewById(R.id.bt_send);
         tv_name.setText(teacher_name);
-
-
-
         ConnectivityManager connMgr = (ConnectivityManager) getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo == null) {
@@ -110,7 +102,6 @@ public class AttendanceActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getChildrenCount() == 0) {
                         pDialog.dismiss();
-                        // totalstudent=dataSnapshot.getChildrenCount();
                         Toast toast = Toast.makeText(AttendanceActivity.this, "No Student Present", Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -125,29 +116,19 @@ public class AttendanceActivity extends AppCompatActivity {
                             post.setStud_sub(subject);
                             post.setStud_sec(section);
                             post.setDate(date);
-
                             studentlist.add(post);
-
                         }
-
                         adapter = new RecyclerAdapter(AttendanceActivity.this, studentlist);
                         mRecyclerView.setAdapter(adapter);
                         pDialog.dismiss();
 
                     }
-
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-
                 }
             });
-
-
-        }
-
-
+       }
         btn_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -160,8 +141,6 @@ public class AttendanceActivity extends AppCompatActivity {
                 countdata.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        // Log.i("ChCount222", "" + dataSnapshot.getChildrenCount());
                         for (DataSnapshot data :dataSnapshot.getChildren()){
                             StudentUser user_info = data.getValue(StudentUser.class);
                             user_info.setEmailid(user_info.getEmailid());
@@ -178,22 +157,12 @@ public class AttendanceActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                //Log.i("daata876", "" + dataSnapshot.getChildrenCount());
                                 long listData = dataSnapshot.getChildrenCount();
-
-
-
                                 if (alldata != listData) {
-
                                     store_list.clear();
-
                                     Toast.makeText(AttendanceActivity.this, "Mark All The Student Attendance", Toast.LENGTH_SHORT).show();
 
                                 } else {
-
-
-
-
                                     Iterator<DataSnapshot> item = dataSnapshot.getChildren().iterator();
 
                                     while (item.hasNext()){
@@ -202,39 +171,18 @@ public class AttendanceActivity extends AppCompatActivity {
                                         if (absdata.equals("absent")) {
                                             roll_abs = items.getKey();
                                             my2mail.add(roll_abs);
-                                            Log.i("list88",""+store_list.size());
-                                            // Log.i("rollno43",""+roll_abs);
-                                            //Log.i("rollno43",""+my2mail);
-                                        }
-
-
+                                         }
                                     }
-
                                     for (int j= 0;j<store_list.size();j++){
-                                           /* Log.i("rll88",""+store_list.get(j).getEmailid());
-                                            Log.i("jl88",""+store_list.get(j).getRollno());
-*/
                                         for (int y=0;y<my2mail.size();y++){
-                                            // Log.i("yl88",""+my2mail.get(y));
                                             if (store_list.get(j).getRollno().equals(my2mail.get(y))){
-                                                //Log.i("mail55",""+store_list.get(j).getEmailid());
                                                 list_abs.add(store_list.get(j).getEmailid());
-
                                             }
-
-
                                         }
-
-
-
                                     }
                                     sendmail(v,list_abs);
                                     Toast.makeText(AttendanceActivity.this, "Attendance Submitted", Toast.LENGTH_SHORT).show();
-
-
                                 }
-
-
                             }
 
                             @Override
@@ -242,8 +190,6 @@ public class AttendanceActivity extends AppCompatActivity {
 
                             }
                         });
-
-
                     }
 
                     @Override
@@ -251,14 +197,9 @@ public class AttendanceActivity extends AppCompatActivity {
 
                     }
                 });
-
-
             }
         });
-
     }
-
-
 
     private void sendmail(View v, final ArrayList<String> my2mai1l) {
         dialog = new Dialog(v.getContext());
@@ -270,39 +211,22 @@ public class AttendanceActivity extends AppCompatActivity {
         bt_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("childrollno", "" + my2mai1l);
                 for(int i =0;i<1;i++){
-
                     email = my2mai1l.get(i);
-                    // Log.i("email55",""+email);
-                }
-
+                 }
                 String mail_subject = "Attendance Remark";
                 String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
-
                 SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
-
-//                String email = "info@atriodata.com";
-//                String mail_subject = "Attendance Remark";
-//                String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
-//
-//                SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
-
                 sm.execute();
-
                 dialog.dismiss();
             }
         });
-
-
         bt_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
-
     }
 
 

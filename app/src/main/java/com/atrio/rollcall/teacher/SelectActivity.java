@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class SelectActivity extends AppCompatActivity {
 
-    String item_class,item_sub,item_sec;
+    String item_sub;
     Button bt_sub;
     String section,class_name;
     ProgressDialog dialog;
@@ -38,55 +37,31 @@ public class SelectActivity extends AppCompatActivity {
         dialog = new ProgressDialog(SelectActivity.this);
         dialog.setMessage("Please Wait....");
         dialog.setCanceledOnTouchOutside(false);
-        ArrayAdapter<CharSequence> adpter_class = ArrayAdapter.createFromResource(SelectActivity.this,
-                R.array.class_name, android.R.layout.simple_spinner_item);
-
-        ArrayAdapter<CharSequence> adapter_sec = ArrayAdapter.createFromResource(SelectActivity.this,
-                R.array.section, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adpter_class = ArrayAdapter.createFromResource(SelectActivity.this,R.array.class_name, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter_sec = ArrayAdapter.createFromResource(SelectActivity.this,R.array.section, android.R.layout.simple_spinner_item);
 
         adpter_class.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter_sec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         sp_class.setAdapter(adpter_class);
         sp_sec.setAdapter(adapter_sec);
         sp_sec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 section = adapterView.getItemAtPosition(i).toString();
-                Log.i("item_sub11",""+section);
-                //Toast.makeText(getAcctivity(),""+section,Toast.LENGTH_SHORT).show();
-
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
-
             }
         });
         sp_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 class_name = adapterView.getItemAtPosition(i).toString();
-
-                Log.i("item_class11",""+class_name);
-                //Toast.makeText(getAcctivity(),""+section,Toast.LENGTH_SHORT).show();
-
             }
-
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
-
             }
         });
-
-
-
 
         List<String> sub = new ArrayList<String>();
         sub.add("Maths");
@@ -97,29 +72,13 @@ public class SelectActivity extends AppCompatActivity {
         sub.add("Social Science");
         sub.add("General Knowledge");
 
-
-
         ArrayAdapter<String> subAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sub);
-
-
-        // Drop down layout style - list view with radio button
-
         subAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-        // attaching data adapter to spinner
-
-
-
         sp_sub.setAdapter(subAdapter);
         sp_sub.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 item_sub = parent.getItemAtPosition(position).toString();
-
-
-                //Toast.makeText(parent.getContext(), "Android Simple Spinner Example Output..." + item, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -127,9 +86,6 @@ public class SelectActivity extends AppCompatActivity {
 
             }
         });
-
-
-
      bt_sub.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
@@ -144,24 +100,15 @@ public class SelectActivity extends AppCompatActivity {
                  toast.show();
 
              }else{
-
-
                  Intent teach=getIntent();
                  String teach_name=teach.getStringExtra("teacher_name");
-                 Log.i("teachername2",""+teach_name);
-
-
                  dialog.show();
                  Intent isend = new Intent(SelectActivity.this,AttendanceActivity.class);
                  isend.putExtra("class",class_name);
                  isend.putExtra("subject",item_sub);
                  isend.putExtra("section",section);
                  isend.putExtra("teach_name",teach_name);
-                 Log.i("teachername3",""+teach_name);
-
-
                  startActivity(isend);
-
                  dialog.dismiss();
              }
 

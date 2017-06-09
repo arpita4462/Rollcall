@@ -40,77 +40,47 @@ public class TeacherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         selectdialog = new Dialog(TeacherActivity.this);
         selectdialog.setContentView(R.layout.remark_attandance_select);
-//        selectdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_teacher);
-
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_pass);
         inputLayoutName = (TextInputLayout) findViewById(R.id.input_layout_name);
         bt_sub = (Button)findViewById(R.id.btn_sub);
         et_email = (EditText)findViewById(R.id.input_name);
         et_pass = (EditText)findViewById(R.id.input_pass);
-
-
         database = FirebaseDatabase.getInstance();
-
         mDatabaseReference = database.getReference("TeacherList");
-
         dialog = new ProgressDialog(TeacherActivity.this);
         dialog.setMessage("Please Wait....");
-
 
         bt_sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 email = et_email.getText().toString().trim();
                 pass = et_pass.getText().toString().trim();
-
                 login();
-//        Log.i("data1",""+email);
-
             }
         });
-
-
     }
-
     private void login() {
-
-       // Log.i("comingtoLOgin",""+correct_email);
         if (!validateEmail()) {
             return;
-
         }else if (!validatePassword()) {
             Log.i("elseif",""+correct_email);
             return;
-
         }else {
             validateUser();
-
         }
-
-
     }
-
     private void validateUser() {
         dialog.show();
-
         Query queryRef = mDatabaseReference.orderByChild("email_id").equalTo(email);
-        //Log.i("q4",""+queryRef);
 
    queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
        @Override
        public void onDataChange(DataSnapshot dataSnapshot) {
-
-           //Log.i("CountData",""+dataSnapshot.getChildrenCount());
-
            if (dataSnapshot.getChildrenCount() == 0){
-
                dialog.dismiss();
                inputLayoutName.setError(getString(R.string.err_msg_email));
                requestFocus(et_email);
-             //  Toast.makeText(getApplicationContext(),"Something went wrong. You entered InCorrect Email ", Toast.LENGTH_SHORT).show();
-
            }else {
 
                inputLayoutName.setErrorEnabled(false);
@@ -119,21 +89,13 @@ public class TeacherActivity extends AppCompatActivity {
                    correct_email = post.getEmail_id();
                    correct_pwd = post.getPassword();
                    teacher_name=post.getName();
-                  /* Log.i("data2",""+correct_email);
-                   Log.i("data21",""+correct_pwd);*/
                }
-
                if (!pass.equals(correct_pwd)){
                    dialog.dismiss();
                    inputLayoutPassword.setError(getString(R.string.err_msg_password));
                    requestFocus(et_pass);
                }else{
                    dialog.dismiss();
-//                   Intent iSelect = new Intent(TeacherActivity.this,SelectActivity.class);
-//                   iSelect.putExtra("teacher_name",teacher_name);
-//                   Log.i("teachername1",""+teacher_name);
-//                   startActivity(iSelect);
-
                    selectdialog.show();
                    Button bt_atten = (Button) selectdialog.findViewById(R.id.btn_atten);
                    Button bt_remark = (Button) selectdialog.findViewById(R.id.btn_remark);
@@ -145,13 +107,9 @@ public class TeacherActivity extends AppCompatActivity {
                            Log.i("teachername1",""+teacher_name);
                            startActivity(iSelect);
                            selectdialog.dismiss();
-
-
                        }
 
                    });
-
-
                    bt_remark.setOnClickListener(new View.OnClickListener() {
                        @Override
                        public void onClick(View view) {
@@ -163,9 +121,6 @@ public class TeacherActivity extends AppCompatActivity {
                        }
                    });
 
-//                   finish();
-
-
                }
            }
 
@@ -176,13 +131,7 @@ public class TeacherActivity extends AppCompatActivity {
 
        }
    });
-
-
-
-
-
     }
-
 
     private boolean validatePassword() {
 
@@ -193,34 +142,24 @@ public class TeacherActivity extends AppCompatActivity {
         } else {
             inputLayoutPassword.setErrorEnabled(false);
         }
-
-
         return true;
     }
-
     private boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
     private boolean validateEmail() {
-        //Log.i("Print99",""+parent_email);
         if (email.isEmpty() || !isValidEmail(email)) {
-//            Log.i("data3",""+email);
             inputLayoutName.setError(getString(R.string.err_msg_email));
             requestFocus(et_email);
             return false;
         } else {
             inputLayoutName.setErrorEnabled(false);
         }
-
         return true;
     }
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
-
-
 }

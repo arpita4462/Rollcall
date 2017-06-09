@@ -59,10 +59,6 @@ public class SelectAdmin extends AppCompatActivity {
                 imov.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(imov);
                 finish();
-
-
-
-
             }
         });
 
@@ -71,15 +67,12 @@ public class SelectAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i= new Intent(SelectAdmin.this,AdminActivity.class);
                 startActivity(i);
-
             }
         });
         btn_report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 customReport.show();
-
             }
         });
 
@@ -103,28 +96,19 @@ public class SelectAdmin extends AppCompatActivity {
                         Intent i=new Intent(SelectAdmin.this, TeacherDetail.class);
                         startActivity(i);
                         dialog.dismiss();
-
-
                          }
 
                 });
-
-
                 bt_stud.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         customDetail.show();
                         dialog.dismiss();
-
                     }
                 });
-
                 dialog.show();
             }
         });
-
-
         btn_timetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,15 +125,12 @@ public class SelectAdmin extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(SelectAdmin.this,MainActivity.class));
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         customDetail.dismiss();
-//       dialog.dismiss();
-
     }
 }
 

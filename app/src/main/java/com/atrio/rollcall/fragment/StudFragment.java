@@ -11,7 +11,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -81,7 +80,6 @@ public class StudFragment extends Fragment {
         spin_class = (Spinner)view1.findViewById(R.id.spin_class);
         spin_sec = (Spinner)view1.findViewById(R.id.spin_sec);
         parent_tv = (EditText) view1.findViewById(R.id.parent);
-//        rollnotv = (EditText) view1.findViewById(R.id.rollno);
         emailtv = (EditText) view1.findViewById(R.id.email);
         addresstv = (EditText) view1.findViewById(R.id.home);
         dobtv = (EditText) view1.findViewById(R.id.dob);
@@ -93,7 +91,6 @@ public class StudFragment extends Fragment {
 
         adpter_class.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter_sec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spin_class.setAdapter(adpter_class);
         spin_sec.setAdapter(adapter_sec);
 
@@ -102,7 +99,6 @@ public class StudFragment extends Fragment {
         dialog.setCanceledOnTouchOutside(false);
 
         submitButton = (Button) view1.findViewById(R.id.submit);
-//        submitButton.setEnabled(false);
 
         spin_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -154,15 +150,10 @@ public class StudFragment extends Fragment {
 
         addresstv.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                // If the event is a key-down event on the "enter" button
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
-//                    Toast.makeText(HelloFormStuff.this, edittext.getText(), Toast.LENGTH_SHORT).show();
                     return true;
                 }
-//                dobtv.requestFocus();
-
                 return false;
             }
         });
@@ -180,9 +171,7 @@ public class StudFragment extends Fragment {
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
                                 dobtv.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
-
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -212,35 +201,19 @@ public class StudFragment extends Fragment {
                         dob = dobtv.getText().toString();
                         mob = mobiletv.getText().toString();
                         gender = radioSexButton.getText().toString();
-//                        rollno = rollnotv.getText().toString();
-/*
-                            subclass = class_name.substring(class_name.indexOf("-") + 1, class_name.length());
-                            rollno=subclass + "-1";
-                            Log.i("q2553", "" + rollno);*/
-
-
-
                             dialog.show();
-//                        Query readqery = db_ref.child(class_name).child(section).orderByChild("rollno").limitToLast(1);
+
                             Query readqery = db_ref.child(class_name).child(section).orderByKey();
-
-                       /*     Log.i("q23", "" + class_name);
-                        Log.i("q23", "" + section);
-                        Log.i("q23", "" + readqery);*/
-
                         readqery.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                if(dataSnapshot.getChildrenCount()==0){
                                     subclass = class_name.substring(class_name.indexOf("-") + 1, class_name.length());
-
                                     rollno=subclass+"-001";
                                     createSdutentDetail(first_name, last_name, studclass, rollno, parents_name, emailid, per_address, dob, mob, gender, class_name, section);
                                     nametv.setText("");
                                     et_last_name.setText("");
-//                       classtv.setText("");
-//                                    rollnotv.setText(rollno);
                                     parent_tv.setText("");
                                     emailtv.setText("");
                                     addresstv.setText("");
@@ -253,23 +226,13 @@ public class StudFragment extends Fragment {
                                 }else {
 
                                         long countchild = dataSnapshot.getChildrenCount();
-//                                        lastrollno = (String) child.child("rollno").getValue();
-//int rollplus = (Integer.parseInt(lastrollno.substring(lastrollno.indexOf("-") + 1, lastrollno.length())) + 1);
                                         countchild++;
-                                        Log.i("subclass", "" + countchild);
                                         subclass = class_name.substring(class_name.indexOf("-") + 1, class_name.length());
-                                        Log.i("rollnodisplay", "" + subclass + "-" + countchild);
                                         rollno=subclass + "-" +String.format("%03d",countchild);
-//                                    rollno=rollnotv.getText().toString();
-                                   Log.i("rollformat", "" + rollno);
-
-
                                         dialog.show();
                                         createSdutentDetail(first_name, last_name, studclass, rollno, parents_name, emailid, per_address, dob, mob, gender, class_name, section);
                                         nametv.setText("");
                                         et_last_name.setText("");
-//                       classtv.setText("");
-//                                        rollnotv.setText(rollno);
                                         parent_tv.setText("");
                                         emailtv.setText("");
                                         addresstv.setText("");
@@ -279,8 +242,6 @@ public class StudFragment extends Fragment {
                                         Toast.makeText(getContext(), "SuccessFully Register", Toast.LENGTH_LONG).show();
                                         showrollno(rollno);
                                         alert.show();
-
-
                                 }
                             }
 
@@ -299,24 +260,10 @@ public class StudFragment extends Fragment {
     }
 
     private void showrollno(String rollno) {
-       /* builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Your Roll No is ");
-        builder.setMessage(rollno);
-        builder.setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(getContext(),"Yes is clicked",Toast.LENGTH_LONG).show();
-                    }
-                });*/
-
         TextView title = new TextView(getActivity());
-        // You Can Customise your Title here
         title.setText("Your Roll No is");
-        //title.setBackgroundColor(Color.DKGRAY);
-//        title.setPadding(10, 10, 10, 10);
         title.setGravity(Gravity.CENTER);
         title.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCustomTitle(title);
@@ -373,7 +320,6 @@ public class StudFragment extends Fragment {
 
 
     private boolean validate() {
-// check whether the field is empty or not
         if (nametv.getText().toString().trim().length() < 1) {
             nametv.setError("Please Fill This Field");
             nametv.requestFocus();
@@ -394,14 +340,6 @@ public class StudFragment extends Fragment {
         }else if (section.equals("Select section")){
             Toast.makeText(getContext(), "Select Section", Toast.LENGTH_LONG).show();
             return false;
-/*
-
-        } else if (rollnotv.getText().toString().trim().length() < 1) {
-            rollnotv.setError("Please Fill This Field");
-            rollnotv.requestFocus();
-            return false;
-*/
-
         } else if (parent_tv.getText().toString().trim().length() < 1) {
             parent_tv.setError("Please Fill This Field");
             parent_tv.requestFocus();
@@ -434,8 +372,5 @@ public class StudFragment extends Fragment {
 
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-     boolean isValidMobile(String phone) {
-        return android.util.Patterns.PHONE.matcher(phone).matches();
     }
 }

@@ -72,7 +72,7 @@ public class RemarkAcitvity extends AppCompatActivity {
 
         clicked=false;
         bt_send.setEnabled(false);
-        progressDialog = new ProgressDialog(getApplicationContext());
+        progressDialog = new ProgressDialog(RemarkAcitvity.this);
         progressDialog.setMessage("Please Wait....");
         progressDialog.setCanceledOnTouchOutside(false);
 
@@ -319,22 +319,15 @@ progressDialog.dismiss();
                                     Log.i("childrollno", "" + mailall.size());
 
                                     for (int i = 0; i < 1; i++) {
-
                                         email = mailall.get(i);
                                     }
-
                                     String mail_subject = "Student Remark";
                                     String message = "" + et_remark.getText().toString();
-
                                     SendMail sendmailall = new SendMail(v.getContext(), email, mail_subject, message, mailall);
-
                                     sendmailall.execute();
-
                                     dialog.dismiss();
                                 }
                             });
-
-
                             bt_no.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -362,11 +355,8 @@ progressDialog.dismiss();
                     if (list_data.get(i).getRollno().equals(data1) ){
                     }
                 }
-
             }
         });
-
-
 
     }
 

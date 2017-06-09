@@ -66,19 +66,15 @@ public class DailyReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_report);
         daily_tv=(TextView)findViewById(R.id.dailyrep_tv);
-
-
         db_instance = FirebaseDatabase.getInstance();
         db_ref = db_instance.getReference("AttendanceList");
         db_ref2 = db_instance.getReference("StudentList");
-
         iget = getIntent();
         studclass = iget.getStringExtra("studclass");
         section = iget.getStringExtra("section");
         calander = Calendar.getInstance();
         simpledateformat = new SimpleDateFormat("dd-MM-yyyy");
         date = simpledateformat.format(calander.getTime());
-//        date="17-05-2017";
         rolldata = new ArrayList<String>();
         roll_eng = new ArrayList<>();
         roll_math = new ArrayList<>();
@@ -103,33 +99,17 @@ public class DailyReport extends AppCompatActivity {
         };
         checkPermissions();
         subclass = studclass.substring(studclass.indexOf("-") + 1, studclass.length());
-        Log.i("subclass",""+subclass);
-
-
-        //New Workbook
         wb = new HSSFWorkbook();
-
         c = null;
-
-        //Cell style for header row
         cs = wb.createCellStyle();
         cs.setFillForegroundColor(HSSFColor.LIME.index);
         cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-
-        //New Sheet
         sheet1 = null;
         sheet1 = wb.createSheet(date);
-//        sheet1.setDefaultRowHeight((short) 25);
-//        sheet1.getRow(0).getCell(0).setCellStyle(cs);
-
         sdcard = Environment.getExternalStorageDirectory();
-
         dir = new File(sdcard.getAbsolutePath() + "/RollCall/");
-        Log.i("Dir44",""+dir);
         dir.mkdir();
         file = new File(dir,"Attendance-"+subclass+"-"+date+".xls");
-        Log.i("Dir44",""+file);
-
         outStream = null;
 
         final Query queryRef = db_ref2.child(studclass).child(section).orderByKey();
@@ -138,32 +118,18 @@ public class DailyReport extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.getChildrenCount() == 0) {
                     Toast.makeText(getApplicationContext(), "Invalid Data", Toast.LENGTH_LONG).show();
-//
                 }else{
-
                     queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
                             for (DataSnapshot data : dataSnapshot.getChildren()){
                                 StudentUser post = data.getValue(StudentUser.class);
-
                                 rolldata.add(post.getRollno());
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 saveExcelFile(rolldata, "0");
-
-
-
-
                             }
-
-
-
-
                         }
 
                         @Override
@@ -175,24 +141,15 @@ public class DailyReport extends AppCompatActivity {
                     data_eng.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
                             for (DataSnapshot data: dataSnapshot.getChildren()){
                                 String status = data.getValue().toString();
                                 roll_eng.add(status);
-
-
-
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 updateExcelFile(roll_eng,"1");
-
-
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
@@ -207,21 +164,14 @@ public class DailyReport extends AppCompatActivity {
                             for (DataSnapshot data: dataSnapshot.getChildren()){
                                 String status = data.getValue().toString();
                                 roll_math.add(status);
-
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 updateExcelFile(roll_math,"2");
-
-
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
 
@@ -233,20 +183,12 @@ public class DailyReport extends AppCompatActivity {
                             for (DataSnapshot data: dataSnapshot.getChildren()){
                                 String status = data.getValue().toString();
                                 roll_hindi.add(status);
-
-
-
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 updateExcelFile(roll_hindi,"3");
-
-
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
@@ -260,20 +202,12 @@ public class DailyReport extends AppCompatActivity {
                             for (DataSnapshot data: dataSnapshot.getChildren()){
                                 String status = data.getValue().toString();
                                 roll_science.add(status);
-
-
-
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 updateExcelFile(roll_science,"4");
-
-
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
 
@@ -287,105 +221,60 @@ public class DailyReport extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot data: dataSnapshot.getChildren()){
                                 String status = data.getValue().toString();
-                                //Log.i("DataValue22",""+data.getValue());
                                 roll_gen.add(status);
-
-
-
                             }
-
                             String state = Environment.getExternalStorageState();
                             if (Environment.MEDIA_MOUNTED.equals(state)) {
-
                                 updateExcelFile(roll_gen,"5");
-
-
                             }
                         }
-
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
-
-
-
-
-
-
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
-
-//        dialog.show();
-
-
-
-
-
     }
-
 
     private boolean updateExcelFile(ArrayList<String> roll_eng, String s) {
 
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            Log.e(TAG, "Storage not available or read only");
             return false;
         }
         boolean success = false;
-
         FileInputStream file = null;
         try {
             file = new FileInputStream(new File("/storage/emulated/0/RollCall/Attendance-"+subclass+"-"+date+".xls"));
-            Log.i("outfile2",""+file);
             HSSFWorkbook workbook = new HSSFWorkbook(file);
             HSSFSheet sheet = workbook.getSheetAt(0);
             Cell cell;
-
             cs = workbook.createCellStyle();
             cs.setFillForegroundColor(HSSFColor.LIME.index);
             cs.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-
-            Log.i("sheet77",""+sheet);
             if (s.equals("1")){
-
                 for (int j =0; j< roll_eng.size();j++){
-                    //Log.i("c",""+roll_eng.get(j));
                     Row row = sheet.getRow(j);
                     cell = row.createCell(1);
                     cell.setCellValue(roll_eng.get(j));
                     sheet.getRow(0).getCell(1).setCellStyle(cs);
                     sheet.setColumnWidth(1, (15 * 200));
                 }
-//
-
-
             }
-
             if (s.equals("2")){
-
                 for (int j =0; j< roll_eng.size();j++){
-                    Log.i("c",""+roll_eng.get(j));
                     Row row = sheet.getRow(j);
                     cell = row.createCell(2);
                     cell.setCellValue(roll_eng.get(j));
                     sheet.getRow(0).getCell(2).setCellStyle(cs);
                     sheet.setColumnWidth(2, (15 * 200));
                 }
-
-
             }
-
             if (s.equals("3")) {
-
                 for (int j = 0; j < roll_eng.size(); j++) {
-                    // Log.i("c", "" + roll_eng.get(j));
                     Row row = sheet.getRow(j);
                     cell = row.createCell(3);
                     cell.setCellValue(roll_eng.get(j));
@@ -393,11 +282,8 @@ public class DailyReport extends AppCompatActivity {
                     sheet.setColumnWidth(3, (15 * 200));
                 }
             }
-
             if (s.equals("4")) {
-
                 for (int j = 0; j < roll_eng.size(); j++) {
-                    //Log.i("c", "" + roll_eng.get(j));
                     Row row = sheet.getRow(j);
                     cell = row.createCell(4);
                     cell.setCellValue(roll_eng.get(j));
@@ -405,11 +291,8 @@ public class DailyReport extends AppCompatActivity {
                     sheet.setColumnWidth(4, (15 * 200));
                 }
             }
-
             if (s.equals("5")) {
-
                 for (int j = 0; j < roll_eng.size(); j++) {
-                    //Log.i("c", "" + roll_eng.get(j));
                     Row row = sheet.getRow(j);
                     cell = row.createCell(5);
                     cell.setCellValue(roll_eng.get(j));
@@ -417,18 +300,10 @@ public class DailyReport extends AppCompatActivity {
                     sheet.setColumnWidth(5, (15 *300));
                 }
             }
-
-
-
-
             file.close();
             FileOutputStream outFile =new FileOutputStream(new File("/storage/emulated/0/RollCall/Attendance-"+subclass+"-"+date+".xls"));
-            Log.i("outfile",""+outFile);
             workbook.write(outFile);
             outFile.close();
-
-            Log.w("FileUtils", "Writing file" + outFile);
-
             success = true;
             File myFile = new File("/storage/emulated/0/RollCall/Attendance-"+subclass+"-"+date+".xls");
             Uri myUri = Uri.fromFile(myFile);
@@ -437,15 +312,12 @@ public class DailyReport extends AppCompatActivity {
             intent.setDataAndType(myUri, "application/vnd.ms-excel");
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-
             try {
                 startActivity(intent);
             }
             catch (ActivityNotFoundException e) {
                 Toast.makeText(DailyReport.this, "No Application Available to View Excel", Toast.LENGTH_SHORT).show();
             }
-
-
             dialog.dismiss();
             daily_tv.setText("See Your Daily Report at:"+"/storage/emulated/0/RollCall/Attendance-"+subclass+"-"+date+".xls");
 
@@ -454,48 +326,28 @@ public class DailyReport extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return success;
     }
 
 
     private  boolean saveExcelFile(ArrayList<String> rolldata, String s) {
-
-        // Log.e("Hiii77", "Storage not available or read only");
-        // check if available and not read only
         if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
-            Log.e(TAG, "Storage not available or read only");
             return false;
         }
-
         boolean success = false;
-
-
         for (int i =0; i< rolldata.size();i++){
-            Log.i("c",""+rolldata.get(i));
             Row row = sheet1.createRow(i);
             c = row.createCell(0);
             c.setCellValue(rolldata.get(i));
             sheet1.getRow(0).getCell(0).setCellStyle(cs);
             sheet1.setColumnWidth(0, (15* 200));
-
         }
-
-
-        Log.i("Hii","Executing");
-        // get the path to sdcard
-
-
         try {
             outStream = new FileOutputStream(file);
             wb.write(outStream);
-
-            Log.w("FileUtils", "Writing file" + file);
             success = true;
         } catch (IOException e) {
-            Log.w("FileUtils", "Error writing " + file, e);
         } catch (Exception e) {
-            Log.w("FileUtils", "Failed to save file", e);
         } finally {
             try {
                 if (null != outStream)
@@ -541,7 +393,6 @@ public class DailyReport extends AppCompatActivity {
         if (requestCode == 100) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // do something
             }
             return;
         }

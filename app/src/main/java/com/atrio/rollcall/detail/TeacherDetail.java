@@ -160,16 +160,10 @@ public class TeacherDetail extends AppCompatActivity {
                 }
             });
 
-
-
-
         }
-
-
 }
 
     private boolean validate() {
-// check whether the field is empty or not
         if (name_et.getText().toString().trim().length() < 1) {
             name_et.setError("Please Fill This Field");
             name_et.requestFocus();
@@ -211,8 +205,6 @@ public class TeacherDetail extends AppCompatActivity {
                 .matches();
     }
     private void findTeacherById(String tech_id) {
-
-//        dialog.show();
         tech_id=emp_id.getText().toString().toLowerCase();
         Query queryRef = db_ref.orderByChild("emp_ID").equalTo(tech_id);
         queryRef.addValueEventListener(new ValueEventListener() {
@@ -238,7 +230,6 @@ public class TeacherDetail extends AppCompatActivity {
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildKey) {
-//                if (snapshot.hasChildren()) {
                 TeacherUser post = snapshot.getValue(TeacherUser.class);
                 name_et.setText(post.getName());
                 empid_et.setText(post.getEmp_ID());
@@ -246,10 +237,6 @@ public class TeacherDetail extends AppCompatActivity {
                 pass_et.setText(post.getPassword());
                 mob_et.setText(post.getMobile());
                 gender_et.setText(post.getGender());
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Invalid Employee ID", Toast.LENGTH_LONG).show();
-//
-//                }
             }
 
             @Override

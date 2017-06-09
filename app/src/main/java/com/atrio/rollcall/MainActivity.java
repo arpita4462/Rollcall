@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         final Runnable r = new Runnable() {
             public void run() {
 
-                // Log.i("Handler", "running");
-
                 RelativeLayout.LayoutParams buttonParam = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -59,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         cdd = new CustomDialog(MainActivity.this);
                         cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        // overridePendingTransition(R.anim.left_right, R.anim.right_left);
                         cdd.show();
                     }
                 });
@@ -74,13 +71,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //Log.i("Calling123","ONRESUME");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Log.i("Calling098","ONPause");
         cdd.dismiss();
     }
 }

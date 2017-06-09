@@ -58,10 +58,8 @@ public class CustomReport extends Dialog implements View.OnClickListener {
         ArrayAdapter<CharSequence> adapter_sec = ArrayAdapter.createFromResource(getContext(),
                 R.array.section, android.R.layout.simple_spinner_item);
 
-
         adpter_class.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter_sec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         sp_class.setAdapter(adpter_class);
         sp_sec.setAdapter(adapter_sec);
         sp_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -75,17 +73,13 @@ public class CustomReport extends Dialog implements View.OnClickListener {
 
             }
         });
-
         sp_sec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 section = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
         et_from.setOnClickListener(new View.OnClickListener() {
@@ -95,20 +89,16 @@ public class CustomReport extends Dialog implements View.OnClickListener {
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
                 datePickerDialog = new DatePickerDialog(getContext(),
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
                                 c.set(Calendar.YEAR, year);
                                 c.set(Calendar.MONTH, monthOfYear);
                                 c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                                String monthname =  new SimpleDateFormat("MMM").format(dateCalendar.getTime());
                                String simpledateformat = new SimpleDateFormat("dd-MM-yyyy").format(c.getTime());
-//                                et_from.setText(simpledateformat.format(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year));
                                 et_from.setText(simpledateformat);
 
                             }
@@ -123,22 +113,17 @@ public class CustomReport extends Dialog implements View.OnClickListener {
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
                 datePickerDialog = new DatePickerDialog(getContext(),
                         new DatePickerDialog.OnDateSetListener() {
 
                             @Override
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
                                 c.set(Calendar.YEAR, year);
                                 c.set(Calendar.MONTH, monthOfYear);
                                 c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-//                                String monthname =  new SimpleDateFormat("MMM").format(dateCalendar.getTime());
                                 String simpledateformat = new SimpleDateFormat("dd-MM-yyyy").format(c.getTime());
-//                                et_from.setText(simpledateformat.format(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year));
                                 et_to.setText(simpledateformat);
-
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
