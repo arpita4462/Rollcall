@@ -65,7 +65,7 @@ protected void onPostExecute(Void aVoid) {
 protected Void doInBackground(Void... params) {
         Properties props = new Properties();
 
-    props.put("mail.smtp.host", "webmail.atriodata.com");
+    props.put("mail.smtp.host", "smtp.gmail.com");
     props.put("mail.smtp.socketFactory.port", "465");
     props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
     props.put("mail.smtp.auth", "true");
@@ -85,8 +85,8 @@ protected PasswordAuthentication getPasswordAuthentication() {
            MimeMessage mm = new MimeMessage(session);
 
         mm.setFrom(new InternetAddress(Config.EMAIL));
-        mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-               for (int i=1;i<my2mail.size();i++){
+       // mm.addRecipient(Message.RecipientType.TO, new InternetAddress());
+               for (int i=0;i<my2mail.size();i++){
                    mm.addRecipient(Message.RecipientType.BCC, new InternetAddress(my2mail.get(i)));
 
                }

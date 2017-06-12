@@ -128,7 +128,7 @@ public class SelectAdmin extends AppCompatActivity {
         btn_timetable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(SelectAdmin.this, TimeTableActivity.class);
+                Intent i=new Intent(SelectAdmin.this, AdminRemarkActivity.class);
                 startActivity(i);
             }
         });

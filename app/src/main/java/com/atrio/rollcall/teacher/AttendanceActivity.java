@@ -271,12 +271,12 @@ public class AttendanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("childrollno", "" + my2mai1l);
-                for(int i =0;i<1;i++){
+               /* for(int i =0;i<1;i++){
 
                     email = my2mai1l.get(i);
                     // Log.i("email55",""+email);
                 }
-
+*/
                 String mail_subject = "Attendance Remark";
                 String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
 
