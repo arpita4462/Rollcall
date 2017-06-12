@@ -254,7 +254,6 @@ public class RemarkAcitvity extends AppCompatActivity {
                                 }
                                 sendData(list_student_info, list_data);
                                 Log.i("datalist1", "" + list_student_info);
-//                                adapter.notifyDataSetChanged();
 
                                 progressDialog.dismiss();
                             }
