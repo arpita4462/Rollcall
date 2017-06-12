@@ -170,6 +170,7 @@ public class RemarkAcitvity extends AppCompatActivity {
             public void onClick(View v) {
                 clicked=true;
                 i=2;
+                mailall = new ArrayList<String>();
                 list_student_info = new ArrayList<>();
                 list_data = new ArrayList<>();
                 bt_indivi.setBackgroundResource(R.drawable.btn);
@@ -195,10 +196,6 @@ public class RemarkAcitvity extends AppCompatActivity {
 
                         while (item.hasNext()){
                             DataSnapshot items = item.next();
-                            String key00= items.getKey();
-                            String name = items.getValue().toString();
-                            Log.i("key88",""+key00);
-                            Log.i("Value88",""+name);
                             StudentUser user = items.getValue(StudentUser.class);
                             String stud_info = user.first_name+" "+user.last_name+"-"+user.getRollno();
 
@@ -271,12 +268,12 @@ progressDialog.dismiss();
                                 public void onClick(View v) {
                                     Log.i("childrollno", "" + mailall);
                                     Log.i("childrollno", "" + mailall.size());
-
+/*
                                     for (int i = 0; i < 1; i++) {
 
                                         email = mailall.get(i);
-                                    }
-
+                                    }*/
+                                    String email ="priyas7715@gmail.com";
                                     String mail_subject = "Student Remark";
                                     String message = "" + et_remark.getText().toString();
 
@@ -315,12 +312,12 @@ progressDialog.dismiss();
                             bt_yes.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Log.i("childrollno", "" + mailall);
-                                    Log.i("childrollno", "" + mailall.size());
-
-                                    for (int i = 0; i < 1; i++) {
+//                                    Log.i("childrollno1", "" + mailall);
+//                                    Log.i("childrollno2", "" + mailall.size());
+                               /*     for (int i = 0; i < 1; i++) {
                                         email = mailall.get(i);
-                                    }
+                                    }*/
+                                    String email ="priyas7715@gmail.com";
                                     String mail_subject = "Student Remark";
                                     String message = "" + et_remark.getText().toString();
                                     SendMail sendmailall = new SendMail(v.getContext(), email, mail_subject, message, mailall);
@@ -336,7 +333,11 @@ progressDialog.dismiss();
                             });
                         }
                     }
+
+                    actv.setText("");
+                et_remark.setText("");
             }
+
         });
     }
 
@@ -353,6 +354,7 @@ progressDialog.dismiss();
                 String data1 = data.substring(data.indexOf("-")+1,data.length());
                 for (int i=0;i<list_data.size();i++){
                     if (list_data.get(i).getRollno().equals(data1) ){
+                        mailall.add(list_data.get(i).getEmailid());
                     }
                 }
             }

@@ -39,7 +39,7 @@ public class AttendanceActivity extends AppCompatActivity {
     Calendar calander;
     SimpleDateFormat simpledateformat;
     Dialog dialog;
-    public String date, time, teacher_name, roll_abs,email;
+    public String date, time, teacher_name, roll_abs;
     RecyclerView mRecyclerView;
     public static ArrayList<String> my2mail,mail_list,list_abs;
     public static ArrayList<StudentUser> studentlist;
@@ -211,9 +211,10 @@ public class AttendanceActivity extends AppCompatActivity {
         bt_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i =0;i<1;i++){
+           /*     for(int i =0;i<1;i++){
                     email = my2mai1l.get(i);
-                 }
+                 }*/
+                String email ="priyas7715@gmail.com";
                 String mail_subject = "Attendance Remark";
                 String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
                 SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
