@@ -118,6 +118,7 @@ public class AttendanceActivity extends AppCompatActivity {
                             post.setDate(date);
                             studentlist.add(post);
                         }
+
                         adapter = new RecyclerAdapter(AttendanceActivity.this, studentlist);
                         mRecyclerView.setAdapter(adapter);
                         pDialog.dismiss();
@@ -212,6 +213,9 @@ public class AttendanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
            /*     for(int i =0;i<1;i++){
+                Log.i("childrollno", "" + my2mai1l);
+               /* for(int i =0;i<1;i++){
+
                     email = my2mai1l.get(i);
                  }*/
                 String email ="priyas7715@gmail.com";

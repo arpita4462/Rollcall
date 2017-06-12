@@ -55,7 +55,7 @@
         android:textColor="@color/buttontext"
         android:id="@+id/btn_timetable"
         android:layout_marginTop="20dp"
-        android:text="Time Table"
+        android:text="Remark"
         android:layout_below="@+id/btn_dailyreport"
         android:layout_centerInParent="true"/>
 
