@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class RemarkAcitvity extends AppCompatActivity {
-    String class_name,section,email;
+    String class_name,section,selectsection;
     Button bt_all,bt_indivi,bt_send;
     private AutoCompleteTextView actv;
     EditText et_remark;
@@ -91,28 +91,8 @@ public class RemarkAcitvity extends AppCompatActivity {
         adapter_sec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_class.setAdapter(adpter_class);
         sp_sec.setAdapter(adapter_sec);
-        sp_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                class_name = parent.getItemAtPosition(position).toString();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-        sp_sec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
 
@@ -132,35 +112,59 @@ public class RemarkAcitvity extends AppCompatActivity {
                 tv_name.setVisibility(View.GONE);
                 actv.setVisibility(View.GONE);
 
-                sp_sec.getSelectedItem().toString();
-                progressDialog.show();
-                Query queryall = db_ref.child(class_name).orderByKey();
-
-                queryall.addListenerForSingleValueEvent(new ValueEventListener() {
+                sp_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.getChildrenCount() != 0){
-                            for (DataSnapshot data :dataSnapshot.getChildren()) {
-                                for (DataSnapshot data2 :data.getChildren()) {
-                                    StudentUser post = data2.getValue(StudentUser.class);
-                                    mailall.add(post.getEmailid());
-                                }
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        class_name = parent.getItemAtPosition(position).toString();
 
-                            }
-                            progressDialog.dismiss();
-
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(), "There is no Student in selected Class", Toast.LENGTH_LONG).show();
-                        }
+                        bt_all.performClick();
+                        actv.setText("");
 
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onNothingSelected(AdapterView<?> parent) {
 
                     }
                 });
+
+
+                class_name=sp_class.getSelectedItem().toString();
+                if (!class_name.isEmpty()){
+                    progressDialog.show();
+                    Query queryall = db_ref.child(class_name).orderByKey();
+
+                    queryall.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getChildrenCount() != 0){
+                                for (DataSnapshot data :dataSnapshot.getChildren()) {
+                                    for (DataSnapshot data2 :data.getChildren()) {
+                                        StudentUser post = data2.getValue(StudentUser.class);
+                                        mailall.add(post.getEmailid());
+                                    }
+
+                                }
+                                progressDialog.dismiss();
+
+                            }
+                            else{
+                                progressDialog.dismiss();
+
+
+                                Toast.makeText(getApplicationContext(), "There is no Student in selected Class", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
 
 
             }
@@ -182,41 +186,93 @@ public class RemarkAcitvity extends AppCompatActivity {
                 tv_name.setVisibility(View.VISIBLE);
                 actv.setVisibility(View.VISIBLE);
                 actv.requestFocus();
-                sp_sec.getSelectedItem().toString();
 
-                progressDialog.show();
-               Query query_key = db_ref.child(class_name).child(section).orderByKey();
-
-
-                query_key.addListenerForSingleValueEvent(new ValueEventListener() {
+                sp_class.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        class_name = parent.getItemAtPosition(position).toString();
 
-                        Iterator<DataSnapshot> item = dataSnapshot.getChildren().iterator();
-
-                        while (item.hasNext()){
-                            DataSnapshot items = item.next();
-                            StudentUser user = items.getValue(StudentUser.class);
-                            String stud_info = user.first_name+" "+user.last_name+"-"+user.getRollno();
-
-                            user.setFirst_name(user.first_name);
-                            user.setLast_name(user.last_name);
-                            user.setEmailid(user.emailid);
-                            user.setRollno(user.rollno);
-
-                            list_student_info.add(stud_info);
-                            list_data.add(user);
-
-                        }
-                        sendData(list_student_info,list_data);
-progressDialog.dismiss();
+                        bt_indivi.performClick();
+                        actv.setText("");
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onNothingSelected(AdapterView<?> parent) {
 
                     }
                 });
+                sp_sec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        section = parent.getItemAtPosition(position).toString();
+                        Log.i("sectionstart41",""+section);
+
+                        bt_indivi.performClick();
+                        actv.setText("");
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                section=sp_sec.getSelectedItem().toString();
+                class_name=sp_class.getSelectedItem().toString();
+                if (!class_name.isEmpty()) {
+
+
+                    progressDialog.show();
+                    Log.i("section4", "" + section);
+
+                    Query query_key = db_ref.child(class_name).child(section).orderByKey();
+
+
+                    query_key.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.getChildrenCount() != 0){
+
+                                Iterator<DataSnapshot> item = dataSnapshot.getChildren().iterator();
+
+                                while (item.hasNext()) {
+
+                                    DataSnapshot items = item.next();
+                                    StudentUser user = items.getValue(StudentUser.class);
+                                    String stud_info = user.first_name + " " + user.last_name + "-" + user.getRollno();
+
+                                    user.setFirst_name(user.first_name);
+                                    user.setLast_name(user.last_name);
+                                    user.setEmailid(user.emailid);
+                                    user.setRollno(user.rollno);
+
+                                    list_student_info.add(stud_info);
+                                    list_data.add(user);
+
+                                }
+                                sendData(list_student_info, list_data);
+                                Log.i("datalist1", "" + list_student_info);
+//                                adapter.notifyDataSetChanged();
+
+                                progressDialog.dismiss();
+                            }
+                            else{
+                                progressDialog.dismiss();
+                                adapter.clear();
+
+                                Toast.makeText(getApplicationContext(), "There is no Student in selected Class", Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
 
@@ -276,9 +332,7 @@ progressDialog.dismiss();
                                     String email ="priyas7715@gmail.com";
                                     String mail_subject = "Student Remark";
                                     String message = "" + et_remark.getText().toString();
-
                                     SendMail sendmailall = new SendMail(v.getContext(), email, mail_subject, message, mailall);
-
                                     sendmailall.execute();
 
                                     dialog.dismiss();
@@ -312,8 +366,8 @@ progressDialog.dismiss();
                             bt_yes.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-//                                    Log.i("childrollno1", "" + mailall);
-//                                    Log.i("childrollno2", "" + mailall.size());
+                                    Log.i("childrollno1", "" + mailall);
+                                    Log.i("childrollno2", "" + mailall.size());
                                /*     for (int i = 0; i < 1; i++) {
                                         email = mailall.get(i);
                                     }*/
@@ -334,8 +388,6 @@ progressDialog.dismiss();
                         }
                     }
 
-                    actv.setText("");
-                et_remark.setText("");
             }
 
         });
