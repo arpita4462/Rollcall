@@ -21,7 +21,6 @@ import com.atrio.rollcall.R;
 import com.atrio.rollcall.adapter.RecyclerAdapter;
 import com.atrio.rollcall.model.StudentUser;
 import com.atrio.rollcall.sendmail.SendMail;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,19 +40,16 @@ public class AttendanceActivity extends AppCompatActivity {
     Calendar calander;
     SimpleDateFormat simpledateformat;
     Dialog dialog;
-    public String date, time, teacher_name,mail_id, roll_abs;
+    public String date, time, teacher_name, roll_abs,email;
     RecyclerView mRecyclerView;
     public static ArrayList<String> my2mail,mail_list,list_abs;
     public static ArrayList<StudentUser> studentlist;
     ProgressDialog pDialog;
     public static String class1, section, subject;
-    FirebaseRecyclerAdapter mFirebaseAdapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     public static DatabaseReference mdatacallAttendance, mDatabaseReference, allreference;
-    long totalstudent;
     RecyclerAdapter adapter;
-    public static int mSelectedItem = -1;
-    DataSnapshot items,item_data;
+    DataSnapshot items;
     ArrayList<StudentUser> store_list;
 
     @Override
@@ -232,8 +228,6 @@ public class AttendanceActivity extends AppCompatActivity {
 
 
                                     }
-                                    // Log.i("rollno33",""+list_abs.size());
-                                    //Log.i("rollno34",""+list_abs);
                                     sendmail(v,list_abs);
                                     Toast.makeText(AttendanceActivity.this, "Attendance Submitted", Toast.LENGTH_SHORT).show();
 
@@ -277,11 +271,22 @@ public class AttendanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("childrollno", "" + my2mai1l);
-                String email = "info@atriodata.com";
+                for(int i =0;i<1;i++){
+
+                    email = my2mai1l.get(i);
+                    // Log.i("email55",""+email);
+                }
+
                 String mail_subject = "Attendance Remark";
                 String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
 
                 SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
+
+//                String email = "info@atriodata.com";
+//                String mail_subject = "Attendance Remark";
+//                String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
+//
+//                SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
 
                 sm.execute();
 

@@ -30,7 +30,6 @@ public class AdminLogin extends AppCompatActivity {
     TextInputLayout inputLayoutName,inputLayoutPassword;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-
     String email,password;
     private CustomRestpwd customRestpwd;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
@@ -54,6 +53,8 @@ public class AdminLogin extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser()!=null){
                     startActivity(new Intent(AdminLogin.this,SelectAdmin.class));
+
+
                     finish();
                 }
             }

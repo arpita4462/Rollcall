@@ -1,5 +1,6 @@
 package com.atrio.rollcall.teacher;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.atrio.rollcall.R;
+import com.atrio.rollcall.RemarkAcitvity;
 import com.atrio.rollcall.model.TeacherUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,10 +32,15 @@ public class TeacherActivity extends AppCompatActivity {
     DatabaseReference mDatabaseReference;
     String pass,email,correct_email,correct_pwd,teacher_name;
     ProgressDialog dialog;
+    Dialog selectdialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        selectdialog = new Dialog(TeacherActivity.this);
+        selectdialog.setContentView(R.layout.remark_attandance_select);
+//        selectdialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_teacher);
 
         inputLayoutPassword = (TextInputLayout) findViewById(R.id.input_layout_pass);
@@ -43,7 +50,8 @@ public class TeacherActivity extends AppCompatActivity {
         et_pass = (EditText)findViewById(R.id.input_pass);
 
 
-         database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         mDatabaseReference = database.getReference("TeacherList");
 
         dialog = new ProgressDialog(TeacherActivity.this);
@@ -121,11 +129,42 @@ public class TeacherActivity extends AppCompatActivity {
                    requestFocus(et_pass);
                }else{
                    dialog.dismiss();
-                   Intent iSelect = new Intent(TeacherActivity.this,SelectActivity.class);
-                   iSelect.putExtra("teacher_name",teacher_name);
-                   Log.i("teachername1",""+teacher_name);
-                   startActivity(iSelect);
-                   finish();
+//                   Intent iSelect = new Intent(TeacherActivity.this,SelectActivity.class);
+//                   iSelect.putExtra("teacher_name",teacher_name);
+//                   Log.i("teachername1",""+teacher_name);
+//                   startActivity(iSelect);
+
+                   selectdialog.show();
+                   Button bt_atten = (Button) selectdialog.findViewById(R.id.btn_atten);
+                   Button bt_remark = (Button) selectdialog.findViewById(R.id.btn_remark);
+                   bt_atten.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           Intent iSelect = new Intent(TeacherActivity.this,SelectActivity.class);
+                           iSelect.putExtra("teacher_name",teacher_name);
+                           Log.i("teachername1",""+teacher_name);
+                           startActivity(iSelect);
+                           selectdialog.dismiss();
+
+
+                       }
+
+                   });
+
+
+                   bt_remark.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view) {
+
+                           Intent i=new Intent(TeacherActivity.this, RemarkAcitvity.class);
+                           startActivity(i);
+                           selectdialog.dismiss();
+
+                       }
+                   });
+
+//                   finish();
+
 
                }
            }

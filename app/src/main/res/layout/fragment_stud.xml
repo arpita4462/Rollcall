@@ -176,8 +176,6 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="5dp"
                     android:maxHeight="80dp"
-
-
                     android:hint="Enter Permanent Address" />
 </android.support.design.widget.TextInputLayout>
                 <!-- place one TextView and one EditText inside layout using weight property -->
