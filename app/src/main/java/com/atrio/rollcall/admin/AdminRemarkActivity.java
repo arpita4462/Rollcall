@@ -340,15 +340,12 @@ public class AdminRemarkActivity extends AppCompatActivity {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
-                // TODO Auto-generated method stub
+            public void beforeTextChanged(CharSequence s, int start, int count,int after) {
 
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
 
             }
         });
