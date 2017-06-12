@@ -33,7 +33,7 @@
         <activity android:name=".ReportActivity" />
         <activity android:name=".admin.AdminLogin" />
         <activity android:name=".DailyReport" />
-        <activity android:name=".admin.TimeTableActivity" />
+        <activity android:name=".admin.AdminRemarkActivity" />
         <activity android:name=".RemarkAcitvity"></activity>
     </application>
 
