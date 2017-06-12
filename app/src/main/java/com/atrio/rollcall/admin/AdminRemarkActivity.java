@@ -2,11 +2,10 @@ package com.atrio.rollcall.admin;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atrio.rollcall.R;
-import com.atrio.rollcall.RemarkAcitvity;
 import com.atrio.rollcall.model.StudentUser;
 import com.atrio.rollcall.sendmail.SendMail;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class AdminRemarkActivity extends AppCompatActivity {
-    String class_name,section,email;
+    String class_name,section;
     Button bt_all,bt_indivi,bt_send,bt_class,btn_all;
     private AutoCompleteTextView actv;
     EditText et_remark;
@@ -90,27 +88,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
         sp_sec.setAdapter(adapter_sec);
 
 
-      // class_name = sp_sec.getSelectedItem().toString();
-        sp_sec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                section = parent.getItemAtPosition(position).toString();
-                Log.i("Section33",""+section);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                //section = "A";
-
-            }
-        });
-
-
-
-
-
-
         tv_class.setVisibility(View.GONE);
         sp_class.setVisibility(View.INVISIBLE);
         tv_sec.setVisibility(View.GONE);
@@ -161,8 +138,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
 
                    }
 
-
-
                }
 
                @Override
@@ -198,7 +173,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         class_name = parent.getItemAtPosition(position).toString();
-                        Log.i("ClassName33",""+class_name);
                         bt_class.performClick();
 
                     }
@@ -206,7 +180,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
-                        //class_name = "Class-V";
                     }
                 });
 
@@ -214,10 +187,8 @@ public class AdminRemarkActivity extends AppCompatActivity {
 
                 progressDialog.show();
 
-                Log.i("ClassName34", "" + class_name);
                 Query queryall = db_ref.child(class_name).orderByKey();
 
-               // Log.i("Query77", "" + queryall);
                 queryall.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -225,14 +196,11 @@ public class AdminRemarkActivity extends AppCompatActivity {
                             for (DataSnapshot data : dataSnapshot.getChildren()) {
                                 for (DataSnapshot data2 : data.getChildren()) {
                                     StudentUser post = data2.getValue(StudentUser.class);
-
-                                    //Log.i("mailSIZE77", "" + post.getEmailid());
                                     mailall.add(post.getEmailid());
 
                                 }
 
                             }
-                            //Log.i("mailSIZE77", "" + mailall.size());
                             progressDialog.dismiss();
 
                         } else {
@@ -275,7 +243,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         class_name = parent.getItemAtPosition(position).toString();
-                        Log.i("ClassName33",""+class_name);
                         bt_indivi.performClick();
                         actv.setText("");
 
@@ -284,7 +251,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
 
-                        //class_name = "Class-V";
                     }
                 });
 
@@ -292,15 +258,12 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         section = parent.getItemAtPosition(position).toString();
-                        Log.i("Section33",""+section);
                         bt_indivi.performClick();
                         actv.setText("");
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {
-
-                        //section = "A";
 
                     }
                 });
@@ -317,10 +280,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                     query_key.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-
-                            // Toast.makeText(AdminRemarkActivity.this, ""+dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-
-
                             if (dataSnapshot.getChildrenCount() != 0) {
                                 list_student_info = new ArrayList<>();
                                 list_data = new ArrayList<>();
@@ -331,8 +290,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
                                     DataSnapshot items = item.next();
                                     String key00 = items.getKey();
                                     String name = items.getValue().toString();
-                                    Log.i("key88", "" + key00);
-                                    Log.i("Value88", "" + name);
                                     StudentUser user = items.getValue(StudentUser.class);
                                     String stud_info = user.first_name + " " + user.last_name + "-" + user.getRollno();
 
@@ -350,9 +307,8 @@ public class AdminRemarkActivity extends AppCompatActivity {
 
                             } else {
                                 progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(), "There is no Student in selected Class", Toast.LENGTH_SHORT).show();
                                 adapter.clear();
-
+                                Toast.makeText(getApplicationContext(), "There is no Student in selected Class", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -412,13 +368,7 @@ public class AdminRemarkActivity extends AppCompatActivity {
                         bt_yes.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Log.i("childrollno", "" + mailall);
-                                Log.i("childrollno", "" + mailall.size());
-
-                               /* for (int i = 0; i < 1; i++) {
-
-                                    email = mailall.get(i);
-                                }*/
+                                String email ="priyas7715@gmail.com";
 
                                 String mail_subject = "Student Remark";
                                 String message = "" + et_remark.getText().toString();
@@ -458,11 +408,10 @@ public class AdminRemarkActivity extends AppCompatActivity {
                         bt_yes.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Log.i("childrollno", "" + mailall);
-                                Log.i("childrollno", "" + mailall.size());
+//                                Log.i("childrollno", "" + mailall);
+//                                Log.i("childrollno", "" + mailall.size());
 
-
-
+                                String email ="priyas7715@gmail.com";
                                 String mail_subject = "Student Remark";
                                 String message = "" + et_remark.getText().toString();
 
@@ -508,7 +457,6 @@ public class AdminRemarkActivity extends AppCompatActivity {
 
                 for (int i=0;i<list_data.size();i++){
                     if (list_data.get(i).getRollno().equals(data1) ){
-                       // Log.i("EmailId",""+list_data.get(i).getEmailid());
                         mailall.add(list_data.get(i).getEmailid());
 
                     }
