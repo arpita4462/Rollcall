@@ -5,6 +5,9 @@ package com.atrio.rollcall.sendmail;
  */
 
 public class Config {
-    public static final String EMAIL ="priyas7715@gmail.com";
-    public static final String PASSWORD ="Qwerty7715";
+   /* public static final String EMAIL ="priyas7715@gmail.com";
+    public static final String PASSWORD ="Qwerty7715";*/
+
+    public static final String EMAIL ="info@atriodata.com";
+    public static final String PASSWORD ="@infodata2017$";
 }

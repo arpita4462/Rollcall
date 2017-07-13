@@ -13,6 +13,8 @@
     <string name="my_text"><u>Forget Password</u></string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="email_footer">Priya Narayan\n8007037715\n02041226686\nnarayan23v@gmail.com</string>
+
 
     <string-array name="class_name">
         <item>Class-V</item>

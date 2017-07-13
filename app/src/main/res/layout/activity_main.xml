@@ -19,19 +19,44 @@
     android:src="@drawable/bg"/>
 
 
-    <com.atrio.rollcall.GifImageView
+   <!-- <com.atrio.rollcall.GifImageView
         android:id="@+id/GifImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
-  <!--  <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"/>-->
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#ffffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:id="@+id/GifImageView"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/greensprings" />
+
+        <TextView
+            android:id="@+id/tv_addresss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="1dp"
+            android:padding="2dp"
+            android:text="Greensprings School, 32 olatunde Ayoola Avenue, Anthony Lagos Nigeria."
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:typeface="normal" />
+    </LinearLayout>
 
 
-        android:id="@+id/atrioicon"
-        android:src="@drawable/atrio_data"/>-->
 
 </RelativeLayout>

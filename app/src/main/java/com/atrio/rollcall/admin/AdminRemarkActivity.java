@@ -288,8 +288,8 @@ public class AdminRemarkActivity extends AppCompatActivity {
 
                                 while (item.hasNext()) {
                                     DataSnapshot items = item.next();
-                                    String key00 = items.getKey();
-                                    String name = items.getValue().toString();
+//                                    String key00 = items.getKey();
+//                                    String name = items.getValue().toString();
                                     StudentUser user = items.getValue(StudentUser.class);
                                     String stud_info = user.first_name + " " + user.last_name + "-" + user.getRollno();
 

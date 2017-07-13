@@ -3,14 +3,15 @@ package com.atrio.rollcall.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atrio.rollcall.R;
+import com.atrio.rollcall.custom.FixedHoloDatePickerDialog;
 import com.atrio.rollcall.model.StudentUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -165,17 +167,31 @@ public class StudFragment extends Fragment {
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
 
-                datePickerDialog = new DatePickerDialog(getActivity(),android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        new DatePickerDialog.OnDateSetListener() {
+                final Context themedContext = new ContextThemeWrapper(
+                        getActivity(),
+                        android.R.style.Theme_Holo_Light_Dialog
+                );
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                dobtv.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                        dobtv.setText(dayOfMonth + "/"+ (monthOfYear + 1) + "/" + year);
+
+                    }
+                };
+
+                final DatePickerDialog dialog = new FixedHoloDatePickerDialog(
+                        themedContext,
+                        dateSetListener,
+                        mYear,
+                        mMonth,
+                        mDay
+                );
+                dialog.show();
+
+
             }
         });
 

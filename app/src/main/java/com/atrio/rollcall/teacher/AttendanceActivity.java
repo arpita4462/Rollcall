@@ -218,9 +218,10 @@ public class AttendanceActivity extends AppCompatActivity {
 
                     email = my2mai1l.get(i);
                  }*/
-                String email ="priyas7715@gmail.com";
+//                String email ="priyas7715@gmail.com";
+                String email ="info@atriodata.com";
                 String mail_subject = "Attendance Remark";
-                String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class.";
+                String message = "Your little one is absent on " + date + " " + time + " in " + subject + " class."+"\n\n"+getResources().getString(R.string.email_footer);
                 SendMail sm = new SendMail(v.getContext(), email, mail_subject, message, my2mai1l);
                 sm.execute();
                 dialog.dismiss();

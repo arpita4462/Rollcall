@@ -18,7 +18,7 @@ import com.atrio.rollcall.custom.CustomDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView image;
+    private ImageView image,logo;
     RelativeLayout rel;
     private CustomDialog cdd;
     @Override
@@ -26,13 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         image = (ImageView)findViewById(R.id.img_bg);
+        logo = (ImageView)findViewById(R.id.GifImageView);
         rel = (RelativeLayout) findViewById(R.id.activity_main);
         cdd = new CustomDialog(MainActivity.this);
         Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.myanimation);
         image.startAnimation(animation1);
-        GifImageView gifImageView = (GifImageView) findViewById(R.id.GifImageView);
-        gifImageView.setGifImageResource(R.drawable.anigif);
+//        GifImageView gifImageView = (GifImageView) findViewById(R.id.GifImageView);
+//        gifImageView.setGifImageResource(R.drawable.anigif);
 
         final Handler handler = new Handler();
         final Runnable r = new Runnable() {
