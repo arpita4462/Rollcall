@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "546472054152-3m6bgl72l8mi8r3t2qoek0lprjspp1j9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.atrio.rollcall",
+            "certificate_hash": "26ab5b7fe879cfb7b6f8ff14a99d7a7b1763e787"
+          }
+        },
+        {
           "client_id": "546472054152-9ogu1qej4b0astflbn4dmkgtki4k19vh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

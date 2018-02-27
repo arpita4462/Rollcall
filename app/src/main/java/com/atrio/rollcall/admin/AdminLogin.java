@@ -45,6 +45,7 @@ public class AdminLogin extends AppCompatActivity {
         tv_forgetpwd=(TextView)findViewById(R.id.tv_forgetpwd);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+
         mAuth = FirebaseAuth.getInstance();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
